@@ -104,4 +104,7 @@ venv.bak/
 .mypy_cache/
 
 # data
-/ml-latest-small
+ml-latest-small/
+
+#fuseki distribution
+apache-jena-fuseki-3.10.0/
