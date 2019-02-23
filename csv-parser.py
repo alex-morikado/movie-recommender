@@ -1,23 +1,19 @@
 import csv
 
-filepath = 'ml-latest-small/movies.csv'
+READ_FILEPATH = 'ml-latest-small/movies.csv'
+WRITE_FILEPATH = 'edited-movies.csv'
 
-write_filepath = 'edited-movies.csv'
+with open(READ_FILEPATH) as f_read:
+    with open(WRITE_FILEPATH, 'w+') as f_write:
 
-with open(filepath) as f:
-    with open(write_filepath, 'w+') as f_w
+        reader = csv.reader(f_read, delimiter=',')
+        writer = csv.writer(f_write)
 
-    lines = f.readlines()
-    for i, row in enumerate(lines):
-        if i == 0:
-            f_w.write(row)
-        else:
-            cols = row.split(',')
-            genres = cols[2].split('|')
-            for genre in genres:
-                new_line = cols[:2] + genre
-                commas = ','.join(new_line)
-                f_w.write(commas)
-
-
-    
+        for i, row in enumerate(reader):
+            if i == 0:
+                writer.writerow(row)
+            else:
+                genres = row[2].split('|')
+                for genre in genres:
+                    new_line = row[:2] + [genre]
+                    writer.writerow(new_line)
