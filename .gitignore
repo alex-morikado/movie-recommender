@@ -110,3 +110,6 @@ ml-latest-small/
 
 #fuseki distribution
 apache-jena-fuseki-3.10.0/
+
+#api keys file
+keys.py
