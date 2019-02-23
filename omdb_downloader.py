@@ -11,6 +11,12 @@ LINES_TO_READ = 10
 def make_omdb_request(id):
     return requests.get(BASE_URL, params={'i':"tt" + id})
 
+def reduce_data(movie, fields=["Title", "Year", "Rated", "Runtime", "Genre", "Director", "Writer", "Actors", "Language", "Country", "Metascore"]):
+    reduced = dict()
+    for field in fields:
+        reduced[field] = movie[field]
+    return reduced
+
 def write_file(max_lines):
 
     link_file = open(LINK_FILE_PATH, 'r')
@@ -27,7 +33,7 @@ def write_file(max_lines):
             break
         id = line.split(',')[1]
         r = make_omdb_request(id)
-        data.append(r.json())
+        data.append(reduce_data(r.json()))
 
     output_file.write(json.dumps(data) + '\n')
 
