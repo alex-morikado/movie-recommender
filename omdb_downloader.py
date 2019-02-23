@@ -6,12 +6,12 @@ LINK_FILE_PATH = "ml-latest-small/links.csv"
 OUTPUT_FILENAME = "omdb.json"
 BASE_URL = "https://www.omdbapi.com/?apikey=" + keys.omdb
 
-LINES_TO_READ = 3
+LINES_TO_READ = 10
 
 def make_omdb_request(id):
     return requests.get(BASE_URL, params={'i':"tt" + id})
 
-if __name__ == "__main__":
+def write_file(max_lines):
 
     link_file = open(LINK_FILE_PATH, 'r')
     output_file = open(OUTPUT_FILENAME, 'w')
@@ -19,11 +19,21 @@ if __name__ == "__main__":
     #skip the first line as it has the headers
     link_file.readline()
 
-    for i in range(LINES_TO_READ):
-        id = link_file.readline().split(',')[1]
+    data = []
+
+    for i in range(max_lines):
+        line = link_file.readline()
+        if line == '':
+            break
+        id = line.split(',')[1]
         r = make_omdb_request(id)
-        body = r.json()
-        output_file.write(json.dumps(body) + '\n')
+        data.append(r.json())
+
+    output_file.write(json.dumps(data) + '\n')
 
     link_file.close()
     output_file.close()
+
+
+if __name__ == "__main__":
+    write_file(LINES_TO_READ)
