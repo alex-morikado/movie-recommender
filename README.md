@@ -102,5 +102,5 @@ The knowledge used for this system is from the MovieLens latest dataset download
 - movieRuntime
 - movieLanguage
 - movieCountry
-- movieMetaScore
+- movieMetascore
 - movieWriter
