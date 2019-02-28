@@ -78,6 +78,15 @@ The knowledge used for this system is from the MovieLens latest dataset download
 - [ActorInMovies](https://gavotte.cs.northwestern.edu/rbrowse/kbb-frameset.html?concept-id=1285&kb=1)
 - [Director-Movie](https://gavotte.cs.northwestern.edu/rbrowse/kbb-frameset.html?concept-id=1372&kb=1)
 - [Producer-Movie](https://gavotte.cs.northwestern.edu/rbrowse/kbb-frameset.html?concept-id=1410&kb=1)
+- [MPAAAdvisoryClassification-Film](https://gavotte.cs.northwestern.edu/rbrowse/kbb-frameset.html?concept-id=159&kb=1)
+  - instances:
+    - GeneralRating
+    - NC-17Rating
+    - NotYetRatedRating
+    - ParentalGuidance13Rating
+    - ParentalGuidanceRating
+    - RestrictedRating
+    - XRating
 
 ### Relations
 
