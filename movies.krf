@@ -1,5 +1,31 @@
+(in-microtheory Movie-Recommender)
+
 (isa movieRuntime Predicate)
 (arity movieRuntime 2)
 (arg1isa movieRuntime NumberString)
 (arg2isa movieRuntime Movie-CW)
 (comment movieRuntime "(movieRuntime ?runtime ?movie) says that ?movie has a runtime of ?runtime minutes")
+
+(isa movieLanguage Predicate)
+(arity movieLanguage 2)
+(arg1isa movieLanguage Language)
+(arg2isa movieLanguage Movie-CW)
+(comment movieLanguage "(movieLanguage ?language ?movie) says that ?movie is in a language of ?language")
+
+(isa movieCountry Predicate)
+(arity movieCountry 2)
+(arg1isa movieCountry Country)
+(arg2isa movieCountry Movie-CW)
+(comment movieCountry "(movieCountry ?country ?movie) says that ?movie was shot in the country of ?country")
+
+(isa movieMetascore Predicate)
+(arity movieMetascore 2)
+(arg1isa movieMetascore NumberString)
+(arg2isa movieMetascore Movie-CW)
+(comment movieMetascore "(movieMetascore ?score ?movie) says that ?movie has a metascore of ?metascore")
+
+(isa movieWriter Predicate)
+(arity movieWriter 2)
+(arg1isa movieWriter Person)
+(arg2isa movieWriter Movie-CW)
+(comment movieWriter "(movieWriter ?writer ?movie) says that ?movie was written by the writer ?writer")
