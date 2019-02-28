@@ -8,6 +8,15 @@ BASE_URL = "https://www.omdbapi.com/?apikey=" + keys.omdb
 
 LINES_TO_READ = 5
 
+omdbCycMapping = {
+    "Title":"movieTitleString",
+    "Year":"movieReleaseYear",
+    "Rated":"movieAdvisoryRating",
+    "Genre":"movieGenres",
+    "Director":"movieDirector",
+    "Actors":"movieActors"
+    }
+
 def make_omdb_request(id):
     return requests.get(BASE_URL, params={'i':"tt" + id})
 
@@ -37,7 +46,7 @@ def format_attribute(attribute):
 def write_krf(entity, id, file):
     file.write('(isa ' + 'tt' + id + ' Movie-CW)\n')
     for key in entity:
-        pred_and_id = '(movie' + key + ' tt' + str(id)
+        pred_and_id = '(' + omdbCycMapping.get(key, key) + ' tt' + str(id)
         if type(entity[key]) == list:
             for attribute in entity[key]:
                 file.write(pred_and_id + ' ' + format_attribute(attribute) + ')\n')
