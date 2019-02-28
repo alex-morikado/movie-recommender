@@ -1,0 +1,5 @@
+(isa movieRuntime Predicate)
+(arity movieRuntime 2)
+(arg1isa movieRuntime NumberString)
+(arg2isa movieRuntime Movie-CW)
+(comment movieRuntime "(movieRuntime ?runtime ?movie) says that ?movie has a runtime of ?runtime minutes")
