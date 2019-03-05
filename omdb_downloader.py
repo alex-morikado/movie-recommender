@@ -10,7 +10,7 @@ LINES_TO_READ = 5
 
 omdbCycMapping = {
     "Title":"movieTitleString",
-    "Year":"movieReleaseYear",
+    "Year":"movieDecade",
     "Rated":"movieAdvisoryRating",
     "Genre":"movieGenres",
     "Director":"movieDirector",
@@ -19,19 +19,23 @@ omdbCycMapping = {
     "Language":"movieLanguage",
     "Country":"movieCountry",
     "Metascore":"movieMetascore",
-    "Writer":"movieWriter"
+    "Writer":"movieWriter",
+    "imdbRating":"movieImdbRating",
+    "imdbVotes":"movieImdbRatingCount"
     }
 
 def make_omdb_request(id):
     return requests.get(BASE_URL, params={'i':"tt" + id})
 
-def reduce_data(movie, fields=["Title", "Year", "Rated", "Runtime", "Genre", "Director", "Writer", "Actors", "Language", "Country", "Metascore"]):
+def reduce_data(movie, fields=["Title", "Year", "Rated", "Runtime", "Genre", "Director", "Writer", "Actors", "Language", "Country", "Metascore", "imdbRating", "imdbVotes"]):
     reduced = dict()
     for field in fields:
         reduced[field] = movie[field]
 
     if reduced.get("Title", False):
         reduced["Title"] = '"' + reduced["Title"].replace('"', "'") + '"'
+    if reduced.get("Year", False):
+        reduced["Year"] = str(int(reduced["Year"]) // 10 * 10)
     if reduced.get("Genre", False):
         reduced["Genre"] = reduced["Genre"].split(", ")
     if reduced.get("Writer", False):
@@ -46,6 +50,8 @@ def reduce_data(movie, fields=["Title", "Year", "Rated", "Runtime", "Genre", "Di
         reduced["Runtime"] = reduced["Runtime"][0:reduced["Runtime"].find(' ')]
     if reduced.get("Country", False):
         reduced["Country"] = reduced["Country"].split(', ')
+    if reduced.get("imdbVotes", False):
+        reduced["imdbVotes"] = reduced["imdbVotes"].replace(",", "")
 
     return reduced
 
