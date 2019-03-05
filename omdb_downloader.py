@@ -6,7 +6,7 @@ LINK_FILE_PATH = "ml-latest-small/links.csv"
 OUTPUT_FILENAME = "omdb.krf"
 BASE_URL = "https://www.omdbapi.com/?apikey=" + keys.omdb
 
-LINES_TO_READ = 10
+LINES_TO_READ = 5
 
 omdbCycMapping = {
     "Title":"movieTitleString",
@@ -36,6 +36,8 @@ def reduce_data(movie, fields=["Title", "Year", "Rated", "Runtime", "Genre", "Di
         reduced["Genre"] = reduced["Genre"].split(", ")
     if reduced.get("Writer", False):
         reduced["Writer"] = list(set([writer[0:writer.find('(')].strip() for writer in reduced["Writer"].split(", ")]))
+    if reduced.get("Director", False):
+        reduced["Director"] = reduced["Director"].split(", ")
     if reduced.get("Actors", False):
         reduced["Actors"] = reduced["Actors"].split(", ")
     if reduced.get("Language", False):
