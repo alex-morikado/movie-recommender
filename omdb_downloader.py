@@ -6,7 +6,7 @@ LINK_FILE_PATH = "ml-latest-small/links.csv"
 OUTPUT_FILENAME = "omdb.krf"
 BASE_URL = "https://www.omdbapi.com/?apikey=" + keys.omdb
 
-LINES_TO_READ = 5
+LINES_TO_READ = 10
 
 omdbCycMapping = {
     "Title":"movieTitleString",
@@ -14,7 +14,12 @@ omdbCycMapping = {
     "Rated":"movieAdvisoryRating",
     "Genre":"movieGenres",
     "Director":"movieDirector",
-    "Actors":"movieActors"
+    "Actors":"movieActors",
+    "Runtime":"movieRuntime",
+    "Language":"movieLanguage",
+    "Country":"movieCountry",
+    "Metascore":"movieMetascore",
+    "Writer":"movieWriter"
     }
 
 def make_omdb_request(id):
@@ -37,6 +42,8 @@ def reduce_data(movie, fields=["Title", "Year", "Rated", "Runtime", "Genre", "Di
         reduced["Language"] = reduced["Language"].split(", ")
     if reduced.get("Runtime", False):
         reduced["Runtime"] = reduced["Runtime"][0:reduced["Runtime"].find(' ')]
+    if reduced.get("Country", False):
+        reduced["Country"] = reduced["Country"].split(', ')
 
     return reduced
 
