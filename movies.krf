@@ -29,3 +29,21 @@
 (arg1isa movieWriter Person)
 (arg2isa movieWriter Movie-CW)
 (comment movieWriter "(movieWriter ?writer ?movie) says that ?movie was written by the writer ?writer")
+
+(isa movieImdbRating Predicate)
+(arity movieImdbRating 2)
+(arg1isa movieImdbRating NumberString)
+(arg2isa movieImdbRating Movie-CW)
+(comment movieImdbRating "(movieImdbRating ?rating ?movie) says that ?movie has a rating of ?rating on IMDB from user scores")
+
+(isa movieImdbRatingCount Predicate)
+(arity movieImdbRatingCount 2)
+(arg1isa movieImdbRatingCount NumberString)
+(arg2isa movieImdbRatingCount Movie-CW)
+(comment movieImdbRatingCount "(movieImdbRatingCount ?count ?movie) says that ?movie has ?count ratings on IMDB")
+
+(isa movieDecade Predicate)
+(arity movieDecade 2)
+(arg1isa movieDecade NumberString)
+(arg2isa movieDecade Movie-CW)
+(comment movieDecade "(movieDecade ?year ?movie) says that ?movie was released in year "year")
