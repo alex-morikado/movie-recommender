@@ -6,7 +6,7 @@ LINK_FILE_PATH = "ml-latest-small/links.csv"
 OUTPUT_FILENAME = "omdb.krf"
 BASE_URL = "https://www.omdbapi.com/?apikey=" + keys.omdb
 
-LINES_TO_READ = 5
+LINES_TO_READ = 200
 
 omdbCycMapping = {
     "Title":"movieTitleString",
