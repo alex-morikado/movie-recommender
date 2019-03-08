@@ -1,0 +1,33 @@
+
+(<== (similarMovie ?movie1 ?movie2)
+  (different ?movie1 ?movie2)
+  (movieGenres ?movie1 ?genre)
+  (movieGenres ?movie2 ?genre)
+)
+
+(<== (similarMovie ?movie1 ?movie2)
+  (different ?movie1 ?movie2)
+  (movieDirector ?movie1 ?director)
+  (movieDirector ?movie2 ?director)
+)
+
+(<== (recommendedMovies ?inputMovie ?fanFavorite ?criticFavorite ?similarAwards ?academyFavorite)
+  (fanFavoriteMovie ?inputMovie ?fanFavorite)
+  (criticFavorite ?inputMovie ?criticFavorite)
+  (academyFavorite ?inputMovie ?academyFavorite)
+)
+
+(<== (academyFavorite ?inputMovie ?academyFavorite)
+  (similarMovie ?inputMovie ?academyFavorite)
+  (wonAcademyAward ?academyFavorite ?award)
+)
+
+(<== (similarAwards ?inputMovie ?similarAwards)
+  (different ?inputMovie ?similarAwards)
+  (wonAcademyAward ?inputMovie ?award)
+  (wonAcademyAward ?similarAwards ?award)
+)
+
+(<== (criticFavorite ?inputMovie ?criticMovie)
+  (greaterThan )
+)
