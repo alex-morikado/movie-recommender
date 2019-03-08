@@ -6,48 +6,37 @@
   (movieTitleString ?inputMovie ?inputMovieName)
   (movieTitleString ?recommendedMovie ?recommendedMovieName)
   (different ?inputMovie ?recommendedMovie)
-  (recommendMovie ?inputMovie ?recommendedMovie)
+  (movieAdvisoryRating ?inputMovie ?rating)
+  (recommendMovie ?inputMovie ?recommendedMovie ?rating)
+)
+
+(<== (recommendMovieName ?inputMovieName ?recommendedMovieName ?rating)
+  (movieTitleString ?inputMovie ?inputMovieName)
+  (movieTitleString ?recommendedMovie ?recommendedMovieName)
+  (different ?inputMovie ?recommendedMovie)
+  (recommendMovie ?inputMovie ?recommendedMovie ?rating)
 )
 
 ;;; recommendMovie
 
-(<== (recommendMovie ?inputMovie ?recommendedMovie)
-  (fanFavorite ?inputMovie ?recommendedMovie)
+(<== (recommendMovie ?inputMovie ?recommendedMovie ?rating)
+  (fanFavorite ?inputMovie ?recommendedMovie ?rating)
 )
 
-(<== (recommendMovie ?inputMovie ?recommendedMovie)
-  (similarAwards ?inputMovie ?recommendedMovie)
-)
-
-(<== (recommendMovie ?inputMovie ?recommendedMovie)
-  (academyFavorite ?inputMovie ?recommendedMovie)
-)
-
-(<== (recommendMovie ?inputMovie ?recommendedMovie)
-  (criticFavorite ?inputMovie ?recommendedMovie)
+(<== (recommendMovie ?inputMovie ?recommendedMovie ?rating)
+  (criticFavorite ?inputMovie ?recommendedMovie ?rating)
 )
 
 ;;; recommendation types
 
-(<== (academyFavorite ?inputMovie ?academyFavorite)
-  (similarMovie ?inputMovie ?academyFavorite)
-  (wonAcademyAward ?academyFavorite ?award)
-)
-
-(<== (similarAwards ?inputMovie ?similarAwards)
-  (different ?inputMovie ?similarAwards)
-  (wonAcademyAward ?inputMovie ?award)
-  (wonAcademyAward ?similarAwards ?award)
-)
-
-(<== (criticFavorite ?inputMovie ?criticMovie)
-  (similarMovie ?inputMovie ?criticMovie)
+(<== (criticFavorite ?inputMovie ?criticMovie ?rating)
+  (similarMovie ?inputMovie ?criticMovie ?rating)
   (movieMetascore ?criticMovie ?score)
   (greaterThan ?score 85)
 )
 
-(<== (fanFavorite ?movie ?movieToFind)
-  (similarMovie ?movie ?movieToFind)
+(<== (fanFavorite ?movie ?movieToFind ?rating)
+  (similarMovie ?movie ?movieToFind ?rating)
 
   (movieMetascore ?movieToFind ?score)
   (greaterThan 65 ?score)
@@ -56,16 +45,22 @@
   (greaterThan ?numRev 1000)
 )
 
+;;; academyFavorite
+
 ;;; oldies
 
 ;;; hidden gems - high average rating - low number of reviews
 
+;;; similar movie different rating
+
+;;; foreign language film
+
 ;;; similarMovie
 
-(<== (similarMovie ?movie1 ?movie2)
-  (sameDecade ?movie1 ?movie2)
-  (sameAdvisoryRating ?movie1 ?movie2)
-  (sameDirectorOrGenre ?movie1 ?movie2)
+(<== (similarMovie ?inputMovie ?outputMovie ?rating)
+  (sameDecade ?inputMovie ?outputMovie)
+  (movieAdvisoryRating ?outputMovie ?rating)
+  (sameDirectorOrGenre ?inputMovie ?outputMovie)
 )
 
 (<== (sameDirectorOrGenre ?movie1 ?movie2)
