@@ -1,21 +1,22 @@
+;;; recommendMovie
 
-(<== (similarMovie ?movie1 ?movie2)
-  (different ?movie1 ?movie2)
-  (movieGenres ?movie1 ?genre)
-  (movieGenres ?movie2 ?genre)
+(<== (recommendMovie ?inputMovie ?recommendedMovie)
+  (fanFavoriteMovie ?inputMovie ?recommendedMovie)
 )
 
-(<== (similarMovie ?movie1 ?movie2)
-  (different ?movie1 ?movie2)
-  (movieDirector ?movie1 ?director)
-  (movieDirector ?movie2 ?director)
+(<== (recommendMovie ?inputMovie ?recommendedMovie)
+  (similarAwards ?inputMovie ?recommendedMovie)
 )
 
-(<== (recommendedMovies ?inputMovie ?fanFavorite ?criticFavorite ?similarAwards ?academyFavorite)
-  (fanFavoriteMovie ?inputMovie ?fanFavorite)
-  (criticFavorite ?inputMovie ?criticFavorite)
-  (academyFavorite ?inputMovie ?academyFavorite)
+(<== (recommendMovie ?inputMovie ?recommendedMovie)
+  (academyFavorite ?inputMovie ?recommendedMovie)
 )
+
+(<== (recommendMovie ?inputMovie ?recommendedMovie)
+  (criticFavorite ?inputMovie ?recommendedMovie)
+)
+
+;;; recommendation types
 
 (<== (academyFavorite ?inputMovie ?academyFavorite)
   (similarMovie ?inputMovie ?academyFavorite)
@@ -30,4 +31,18 @@
 
 (<== (criticFavorite ?inputMovie ?criticMovie)
   (greaterThan )
+)
+
+;;; similarMovie
+
+(<== (similarMovie ?movie1 ?movie2)
+  (different ?movie1 ?movie2)
+  (movieGenres ?movie1 ?genre)
+  (movieGenres ?movie2 ?genre)
+)
+
+(<== (similarMovie ?movie1 ?movie2)
+  (different ?movie1 ?movie2)
+  (movieDirector ?movie1 ?director)
+  (movieDirector ?movie2 ?director)
 )

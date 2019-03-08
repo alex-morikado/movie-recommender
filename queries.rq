@@ -1,8 +1,0 @@
-PREFIX mov: <http://example.org/data/edited_movies.csv#>
-
-SELECT DISTINCT ?title
-WHERE {
-  ?movie mov:title ?title.
-  ?movie mov:genre "Drama".
-}
-LIMIT 25
