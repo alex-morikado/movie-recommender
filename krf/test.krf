@@ -1,7 +1,16 @@
+;;; recommendMovieName
+
+(<== (recommendMovieName ?inputMovieName ?recommendedMovieName)
+  (movieTitleString ?inputMovie ?inputMovieName)
+  (movieTitleString ?recommendedMovie ?recommendedMovieName)
+  (different ?inputMovie ?recommendedMovie)
+  (recommendMovie ?inputMovie ?recommendedMovie)
+)
+
 ;;; recommendMovie
 
 (<== (recommendMovie ?inputMovie ?recommendedMovie)
-  (fanFavoriteMovie ?inputMovie ?recommendedMovie)
+  (fanFavorite ?inputMovie ?recommendedMovie)
 )
 
 (<== (recommendMovie ?inputMovie ?recommendedMovie)
@@ -30,19 +39,51 @@
 )
 
 (<== (criticFavorite ?inputMovie ?criticMovie)
-  (greaterThan )
+  (similarMovie ?inputMovie ?criticMovie)
+  (movieMetascore ?criticMovie ?score)
+  (greaterThan ?score 85)
 )
+
+(<== (fanFavorite ?movie ?movieToFind)
+  (sameGenre ?movie ?movieToFind)
+  (sameDecade ?movie ?movieToFind)
+
+  (movieMetascore ?movieToFind ?score)
+  (greaterThan 65 ?score)
+
+  (movieImdbRatingCount ?movieToFind ?numRev)
+  (greaterThan ?numRev 1000)
+)
+
+;;; oldies
+
+;;; hidden gems - high average rating - low number of reviews
 
 ;;; similarMovie
 
 (<== (similarMovie ?movie1 ?movie2)
-  (different ?movie1 ?movie2)
+  (sameGenre ?movie1 ?movie2)
+  (sameDecade ?movie1 ?movie2)
+)
+
+(<== (similarMovie ?movie1 ?movie2)
+  (sameDirector ?movie1 ?movie2)
+  (sameDecade ?movie1 ?movie2)  
+)
+
+;;; same things
+
+(<== (sameDecade ?movie1 ?movie2)
+  (movieDecade ?movie1 ?decade)
+  (movieDecade ?movie2 ?decade)
+)
+
+(<== (sameGenre ?movie1 ?movie2)
   (movieGenres ?movie1 ?genre)
   (movieGenres ?movie2 ?genre)
 )
 
-(<== (similarMovie ?movie1 ?movie2)
-  (different ?movie1 ?movie2)
+(<== (sameDirector ?movie1 ?movie2)
   (movieDirector ?movie1 ?director)
   (movieDirector ?movie2 ?director)
 )
