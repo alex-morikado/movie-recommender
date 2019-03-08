@@ -1,3 +1,5 @@
+(in-microtheory Movie-Recommender)
+
 ;;; recommendMovieName
 
 (<== (recommendMovieName ?inputMovieName ?recommendedMovieName)
@@ -45,8 +47,7 @@
 )
 
 (<== (fanFavorite ?movie ?movieToFind)
-  (sameGenre ?movie ?movieToFind)
-  (sameDecade ?movie ?movieToFind)
+  (similarMovie ?movie ?movieToFind)
 
   (movieMetascore ?movieToFind ?score)
   (greaterThan 65 ?score)
@@ -64,11 +65,13 @@
 (<== (similarMovie ?movie1 ?movie2)
   (sameGenre ?movie1 ?movie2)
   (sameDecade ?movie1 ?movie2)
+  (sameAdvisoryRating ?movie1 ?movie2)
 )
 
 (<== (similarMovie ?movie1 ?movie2)
   (sameDirector ?movie1 ?movie2)
-  (sameDecade ?movie1 ?movie2)  
+  (sameDecade ?movie1 ?movie2)
+  (sameAdvisoryRating ?movie1 ?movie2)  
 )
 
 ;;; same things
@@ -86,4 +89,9 @@
 (<== (sameDirector ?movie1 ?movie2)
   (movieDirector ?movie1 ?director)
   (movieDirector ?movie2 ?director)
+)
+
+(<== (sameAdvisoryRating ?movie1 ?movie2)
+  (movieAdvisoryRating ?movie1 ?rating)
+  (movieAdvisoryRating ?movie2 ?rating)
 )
