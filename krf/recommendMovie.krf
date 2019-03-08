@@ -63,15 +63,17 @@
 ;;; similarMovie
 
 (<== (similarMovie ?movie1 ?movie2)
-  (sameGenre ?movie1 ?movie2)
   (sameDecade ?movie1 ?movie2)
   (sameAdvisoryRating ?movie1 ?movie2)
+  (sameDirectorOrGenre ?movie1 ?movie2)
 )
 
-(<== (similarMovie ?movie1 ?movie2)
+(<== (sameDirectorOrGenre ?movie1 ?movie2)
+  (sameGenre ?movie1 ?movie2)
+)
+
+(<== (sameDirectorOrGenre ?movie1 ?movie2)
   (sameDirector ?movie1 ?movie2)
-  (sameDecade ?movie1 ?movie2)
-  (sameAdvisoryRating ?movie1 ?movie2)  
 )
 
 ;;; same things
