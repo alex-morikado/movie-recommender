@@ -2,8 +2,8 @@ import requests
 import keys
 import json
 
-LINK_FILE_PATH = "ml-latest-small/links.csv"
-OUTPUT_FILENAME = "omdb.krf"
+LINK_FILE_PATH = "../ml-latest-small/links.csv"
+OUTPUT_FILENAME = "omdb2.krf"
 BASE_URL = "https://www.omdbapi.com/?apikey=" + keys.omdb
 
 LINES_TO_READ = 200
@@ -22,12 +22,13 @@ omdbCycMapping = {
     "Writer":"movieWriter",
     "imdbRating":"movieImdbRating",
     "imdbVotes":"movieImdbRatingCount"
+    "Awards":"movieAwardWon"
     }
 
 def make_omdb_request(id):
     return requests.get(BASE_URL, params={'i':"tt" + id})
 
-def reduce_data(movie, fields=["Title", "Year", "Rated", "Runtime", "Genre", "Director", "Writer", "Actors", "Language", "Country", "Metascore", "imdbRating", "imdbVotes"]):
+def reduce_data(movie, fields=["Title", "Year", "Rated", "Runtime", "Genre", "Director", "Writer", "Actors", "Language", "Country", "Metascore", "imdbRating", "imdbVotes", "Awards"]):
     reduced = dict()
     for field in fields:
         reduced[field] = movie[field]
@@ -52,6 +53,11 @@ def reduce_data(movie, fields=["Title", "Year", "Rated", "Runtime", "Genre", "Di
         reduced["Country"] = reduced["Country"].split(', ')
     if reduced.get("imdbVotes", False):
         reduced["imdbVotes"] = reduced["imdbVotes"].replace(",", "")
+    if reduced.get("Awards", False):
+        if (reduced["Awards"].lower().find("win") + 1) or (reduced["Awards"].lower().find("won") + 1):
+            reduced["Awards"] = ""
+        else:
+            del reduced["Awards"]
 
     return reduced
 
@@ -65,6 +71,9 @@ def write_krf(entity, id, file):
         if type(entity[key]) == list:
             for attribute in entity[key]:
                 file.write(pred_and_id + ' ' + format_attribute(attribute) + ')\n')
+        elif entity[key] == "Awards":
+            #special case since this is the only arity 1 relation
+            file.write(pred_and_id + ')')
         else:
             file.write(pred_and_id + ' ' + format_attribute(entity[key]) + ')\n')
     file.write('\n')

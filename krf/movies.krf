@@ -47,3 +47,8 @@
 (arg1isa movieDecade NumberString)
 (arg2isa movieDecade Movie-CW)
 (comment movieDecade "(movieDecade ?year ?movie) says that ?movie was released in year "year")
+
+(isa movieAwardWon Predicate)
+(arity movieAwardWon 1)
+(arg1isa movieAwardWon Movie-CW)
+(comment movieAwardWon "(movieAwardWon ?movie) says that ?movie has won a major motion picture award")
