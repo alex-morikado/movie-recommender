@@ -92,3 +92,16 @@
   (movieAdvisoryRating ?movie1 ?rating)
   (movieAdvisoryRating ?movie2 ?rating)
 )
+
+;;;(recommend ?movie ?criteria ?result)
+;;;(elementOf ?c1 ?criteria)
+;;;(unifies ?c1 fanFav)
+;;;(fanFav ?movie ?movieList ?result)
+
+;;; gets all of the bindings for fanFav
+;;;(closedRetrieval ?result SetOf (fanFav ?movie ?movieList ?result))
+
+;;; make sure that movie results are reasonable, be able to combine queries
+
+;;; unifies ?something ?wholePredicate | this would allow us to compose things 
+
