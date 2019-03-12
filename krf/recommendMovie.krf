@@ -47,13 +47,54 @@
 
 ;;; academyFavorite
 
+(<== (academyFavorite ?movie1 ?movie2) 
+ (movieAdvisoryRating ?movie1 ?rating) 
+ (similarMovie ?movie1 ?movie2 ?rating)
+ (movieAwardWon ?movie2) 
+ (movieMetascore ?movie2 ?score)
+ (greaterThan ?score 80)
+)
+
+
 ;;; oldies
 
+(<== (oldies ?movie1 ?movie2)
+ (sameAdvisoryRating ?movie1 ?movie2) 
+ (sameDirectorOrGenre ?movie1 ?movie2) 
+ (movieDecade ?movie2 ?decade)
+ (lessThan ?decade 1980)
+)
+
+
 ;;; hidden gems - high average rating - low number of reviews
+;;; presets: 70% minimum score, 10,000 max reviews
+
+(<== (hiddenGems ?movie1 ?movie2 ?rating)
+ (similarMovie ?movie1 ?movie2 ?rating)
+ (movieMetascore ?movie2 ?score)
+ (lessThan 70 ?score)
+ (movieImdbRatingCount ?movie2 ?numRevs)
+ (greaterThan 10000 ?numRevs)
+)
 
 ;;; similar movie different rating
 
-;;; foreign language film
+(<== (similarMovieNewRating ?movie1 ?movie2)
+ (movieAdvisoryRating ?movie1 ?rating)
+ (similarMovie ?movie1 ?movie2 ?rating2)
+ (different ?rating ?rating2)
+)
+
+
+;;; foreign language movie
+
+(<== (foreignLanguageMovie ?movie1 ?movie2)
+ (movieAdvisoryRating ?movie1 ?rating)
+ (similarMovie ?movie1 ?movie2 ?rating)
+ (movieLanguage ?movie1 ?language1)
+ (movieLanguage ?movie2 ?language2)
+ (different ?language1 ?language2)
+)
 
 ;;; similarMovie
 
@@ -93,13 +134,21 @@
   (movieAdvisoryRating ?movie2 ?rating)
 )
 
-;;;(recommend ?movie ?criteria ?result)
-;;;(elementOf ?c1 ?criteria)
-;;;(unifies ?c1 fanFav)
-;;;(fanFav ?movie ?movieList ?result)
+
+
+(<== (sameActors ?movie1 ?movie2)
+  (movieActors ?movie1 ?actor)
+  (movieActors ?movie2 ?actor)
+)
+
+
+;;; (recommend ?movie ?criteria ?result)
+;;; (elementOf ?c1 ?criteria)
+;;; (unifies ?c1 fanFav)
+;;; (fanFav ?movie ?movieList ?result)
 
 ;;; gets all of the bindings for fanFav
-;;;(closedRetrieval ?result SetOf (fanFav ?movie ?movieList ?result))
+;;; (closedRetrieval ?result SetOf (fanFav ?movie ?movieList ?result))
 
 ;;; make sure that movie results are reasonable, be able to combine queries
 
