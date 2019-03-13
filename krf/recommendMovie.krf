@@ -53,12 +53,10 @@
 )
 
 (<== (fanFavorite ?inputMovie ?fanFavMovie)
-
-  (movieMetascore ?fanFavMovie ?score)
-  (greaterThan 65 ?score)
-
+  (movieImdbRating ?fanFavMovie ?score)
+  (greaterThan 6.5 ?score)
   (movieImdbRatingCount ?fanFavMovie ?numRev)
-  (greaterThan ?numRev 10000)
+  (greaterThan ?numRev 100000)
 )
 
 (<== (academyFavorite ?inputMovie ?academyMovie)
@@ -68,16 +66,15 @@
 )
 
 (<== (oldies ?inputMovie ?oldMovie)
- (sameAdvisoryRating ?oldMovie)
  (sameDirectorOrGenre ?inputMovie ?oldMovie)
  (movieDecade ?oldMovie ?decade)
  (lessThan ?decade 1980)
 )
 
-;;; presets: 70% minimum score, 5,000 max reviews
+;;; presets: 80% minimum score, 5,000 max reviews
 (<== (hiddenGems ?inputMovie ?hiddenGemMovie)
- (movieMetascore ?hiddenGemMovie ?score)
- (lessThan 70 ?score)
+ (movieImdbRating ?hiddenGemMovie ?score)
+ (lessThan 8.0 ?score)
  (movieImdbRatingCount ?hiddenGemMovie ?numRevs)
  (greaterThan 5000 ?numRevs)
 )
