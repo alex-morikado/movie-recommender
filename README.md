@@ -54,5 +54,5 @@ Batman Forever is fan favorite movie that is recommended by this query.
 
 ## Links
 
-- [MovieLens dataset](files.grouplens.org/datasets/movielens/ml-latest-small.zip)
-- [OMBD API](omdbapi.com)
+- [MovieLens dataset](http://files.grouplens.org/datasets/movielens/ml-latest-small.zip)
+- [OMBD API](http://omdbapi.com)
