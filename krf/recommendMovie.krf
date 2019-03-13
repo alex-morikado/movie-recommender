@@ -124,6 +124,16 @@
   (movieGenres ?movie2 ?genre)
 )
 
+(<== (sameGenres ?movie1 ?movie2)
+  (evaluate ?movieGenres1
+     (TheClosedRetrievalSetOf ?genre
+         (movieGenres ?movie1 ?genre)))
+  (evaluate ?movieGenres2
+     (TheClosedRetrievalSetOf ?genre
+         (movieGenres ?movie2 ?genre)))
+  (evaluate ?movieGenres1 ?movieGenres2))
+
+
 (<== (sameDirector ?movie1 ?movie2)
   (movieDirector ?movie1 ?director)
   (movieDirector ?movie2 ?director)
