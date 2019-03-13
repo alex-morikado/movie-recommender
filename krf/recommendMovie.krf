@@ -6,53 +6,53 @@
   (movieTitleString ?inputMovie ?inputMovieName)
   (movieTitleString ?recommendedMovie ?recommendedMovieName)
   (movieAdvisoryRating ?inputMovie ?rating)
-  (recommendMovie ?inputMovie ?recommendedMovie ?rating)
+  (recommendMovie ?inputMovie ?recommendedMovie)
+  (similarMovie ?inputMovie ?recommendedMovie ?rating)
   (different ?inputMovie ?recommendedMovie)
 )
 
 (<== (recommendMovieName ?inputMovieName ?recommendedMovieName ?rating)
   (movieTitleString ?inputMovie ?inputMovieName)
   (movieTitleString ?recommendedMovie ?recommendedMovieName)
-  (recommendMovie ?inputMovie ?recommendedMovie ?rating)
+  (recommendMovie ?inputMovie ?recommendedMovie)
+  (similarMovie ?inputMovie ?recommendedMovie ?rating)
   (different ?inputMovie ?recommendedMovie)
 )
 
 ;;; recommendMovie
 
-(<== (recommendMovie ?inputMovie ?recommendedMovie ?rating)
-  (fanFavorite ?inputMovie ?recommendedMovie ?rating)
+(<== (recommendMovie ?inputMovie ?recommendedMovie)
+  (fanFavorite ?inputMovie ?recommendedMovie)
 )
 
-(<== (recommendMovie ?inputMovie ?recommendedMovie ?rating)
-  (criticFavorite ?inputMovie ?recommendedMovie ?rating)
+(<== (recommendMovie ?inputMovie ?recommendedMovie)
+  (criticFavorite ?inputMovie ?recommendedMovie)
 )
 
-(<== (recommendMovie ?inputMovie ?recommendedMovie ?rating)
-  (academyFavorite ?inputMovie ?recommendedMovie ?rating)
+(<== (recommendMovie ?inputMovie ?recommendedMovie)
+  (academyFavorite ?inputMovie ?recommendedMovie)
 )
 
-(<== (recommendMovie ?inputMovie ?recommendedMovie ?rating)
-  (oldies ?inputMovie ?recommendedMovie ?rating)
+(<== (recommendMovie ?inputMovie ?recommendedMovie)
+  (oldies ?inputMovie ?recommendedMovie)
 )
 
-(<== (recommendMovie ?inputMovie ?recommendedMovie ?rating)
-  (hiddenGems ?inputMovie ?recommendedMovie ?rating)
+(<== (recommendMovie ?inputMovie ?recommendedMovie)
+  (hiddenGems ?inputMovie ?recommendedMovie)
 )
 
-(<== (recommendMovie ?inputMovie ?recommendedMovie ?rating)
-  (foreignLanguage ?inputMovie ?recommendedMovie ?rating)
+(<== (recommendMovie ?inputMovie ?recommendedMovie)
+  (foreignLanguage ?inputMovie ?recommendedMovie)
 )
 
 ;;; recommendation types
 
-(<== (criticFavorite ?inputMovie ?criticMovie ?rating)
-  (similarMovie ?inputMovie ?criticMovie ?rating)
+(<== (criticFavorite ?inputMovie ?criticMovie)
   (movieMetascore ?criticMovie ?score)
   (greaterThan ?score 85)
 )
 
-(<== (fanFavorite ?inputMovie ?fanFavMovie ?rating)
-  (similarMovie ?inputMovie ?fanFavMovie ?rating)
+(<== (fanFavorite ?inputMovie ?fanFavMovie)
 
   (movieMetascore ?fanFavMovie ?score)
   (greaterThan 65 ?score)
@@ -61,23 +61,21 @@
   (greaterThan ?numRev 10000)
 )
 
-(<== (academyFavorite ?inputMovie ?academyMovie ?rating)
- (similarMovie ?inputMovie ?academyMovie ?rating)
+(<== (academyFavorite ?inputMovie ?academyMovie)
  (movieAwardWon ?academyMovie)
  (movieMetascore ?academyMovie ?score)
  (greaterThan ?score 80)
 )
 
-(<== (oldies ?inputMovie ?oldMovie ?rating)
- (sameAdvisoryRating ?rating ?oldMovie)
+(<== (oldies ?inputMovie ?oldMovie)
+ (sameAdvisoryRating ?oldMovie)
  (sameDirectorOrGenre ?inputMovie ?oldMovie)
  (movieDecade ?oldMovie ?decade)
  (lessThan ?decade 1980)
 )
 
 ;;; presets: 70% minimum score, 5,000 max reviews
-(<== (hiddenGems ?inputMovie ?hiddenGemMovie ?rating)
- (similarMovie ?inputMovie ?hiddenGemMovie ?rating)
+(<== (hiddenGems ?inputMovie ?hiddenGemMovie)
  (movieMetascore ?hiddenGemMovie ?score)
  (lessThan 70 ?score)
  (movieImdbRatingCount ?hiddenGemMovie ?numRevs)
@@ -85,13 +83,11 @@
 )
 
 ;(<== (newRating ?inputMovie ?newRatingMovie)
-; (movieAdvisoryRating ?inputMovie ?rating)
-; (similarMovie ?inputMovie ?newRatingMovie ?newRating)
-; (different ?rating ?newRating)
+; (movieAdvisoryRating ?inputMovie)
+; (different ?newRating)
 ;)
 
-(<== (foreignLanguage ?inputMovie ?foreignLanguageMovie ?rating)
- (similarMovie ?inputMovie ?foreignLanguageMovie ?rating)
+(<== (foreignLanguage ?inputMovie ?foreignLanguageMovie)
  (movieLanguage ?foreignLanguageMovie ?language)
  (different ?language English)
 )
@@ -131,8 +127,7 @@
   (evaluate ?movieGenres2
      (TheClosedRetrievalSetOf ?genre
          (movieGenres ?movie2 ?genre)))
-  (evaluate ?movieGenres1 ?movieGenres2))
-
+  (equals ?movieGenres1 ?movieGenres2))
 
 (<== (sameDirector ?movie1 ?movie2)
   (movieDirector ?movie1 ?director)
