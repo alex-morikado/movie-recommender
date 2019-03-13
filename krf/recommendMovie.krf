@@ -21,58 +21,55 @@
 
 ;;; recommendMovie
 
-(<== (recommendMovie ?inputMovie ?recommendedMovie)
-  (fanFavorite ?inputMovie ?recommendedMovie)
+(<== (recommendMovie ?recommendedMovie)
+  (fanFavorite ?recommendedMovie)
 )
 
-(<== (recommendMovie ?inputMovie ?recommendedMovie)
-  (criticFavorite ?inputMovie ?recommendedMovie)
+(<== (recommendMovie ?recommendedMovie)
+  (criticFavorite ?recommendedMovie)
 )
 
-(<== (recommendMovie ?inputMovie ?recommendedMovie)
-  (academyFavorite ?inputMovie ?recommendedMovie)
+(<== (recommendMovie ?recommendedMovie)
+  (academyFavorite ?recommendedMovie)
 )
 
-(<== (recommendMovie ?inputMovie ?recommendedMovie)
-  (oldies ?inputMovie ?recommendedMovie)
+(<== (recommendMovie ?recommendedMovie)
+  (oldies ?recommendedMovie)
 )
 
-(<== (recommendMovie ?inputMovie ?recommendedMovie)
-  (hiddenGems ?inputMovie ?recommendedMovie)
+(<== (recommendMovie ?recommendedMovie)
+  (hiddenGems ?recommendedMovie)
 )
 
-(<== (recommendMovie ?inputMovie ?recommendedMovie)
-  (foreignLanguage ?inputMovie ?recommendedMovie)
+(<== (recommendMovie ?recommendedMovie)
+  (foreignLanguage ?recommendedMovie)
 )
 
 ;;; recommendation types
 
-(<== (criticFavorite ?inputMovie ?criticMovie)
+(<== (criticFavorite ?criticMovie)
   (movieMetascore ?criticMovie ?score)
   (greaterThan ?score 85)
 )
 
-(<== (fanFavorite ?inputMovie ?fanFavMovie)
+(<== (fanFavorite ?fanFavMovie)
   (movieImdbRating ?fanFavMovie ?score)
   (greaterThan 6.5 ?score)
   (movieImdbRatingCount ?fanFavMovie ?numRev)
   (greaterThan ?numRev 100000)
 )
 
-(<== (academyFavorite ?inputMovie ?academyMovie)
+(<== (academyFavorite ?academyMovie)
  (movieAwardWon ?academyMovie)
- (movieMetascore ?academyMovie ?score)
- (greaterThan ?score 80)
 )
 
-(<== (oldies ?inputMovie ?oldMovie)
- (sameDirectorOrGenre ?inputMovie ?oldMovie)
+(<== (oldies ?oldMovie)
  (movieDecade ?oldMovie ?decade)
  (lessThan ?decade 1980)
 )
 
 ;;; presets: 80% minimum score, 5,000 max reviews
-(<== (hiddenGems ?inputMovie ?hiddenGemMovie)
+(<== (hiddenGems ?hiddenGemMovie)
  (movieImdbRating ?hiddenGemMovie ?score)
  (lessThan 8.0 ?score)
  (movieImdbRatingCount ?hiddenGemMovie ?numRevs)
@@ -84,7 +81,7 @@
 ; (different ?newRating)
 ;)
 
-(<== (foreignLanguage ?inputMovie ?foreignLanguageMovie)
+(<== (foreignLanguage ?foreignLanguageMovie)
  (movieLanguage ?foreignLanguageMovie ?language)
  (different ?language English)
 )
@@ -92,17 +89,21 @@
 ;;; similarMovie
 
 (<== (similarMovie ?inputMovie ?outputMovie ?rating)
-  (sameDecade ?inputMovie ?outputMovie)
+  (sameGenre ?inputMovie ?outputMovie)
   (movieAdvisoryRating ?outputMovie ?rating)
-  (sameDirectorOrGenre ?inputMovie ?outputMovie)
+  (sameCreator ?inputMovie ?outputMovie)
 )
 
-(<== (sameDirectorOrGenre ?movie1 ?movie2)
-  (sameGenre ?movie1 ?movie2)
-)
-
-(<== (sameDirectorOrGenre ?movie1 ?movie2)
+(<== (sameCreator ?movie1 ?movie2)
   (sameDirector ?movie1 ?movie2)
+)
+
+(<== (sameCreator ?movie1 ?movie2)
+  (sameWriter ?movie1 ?movie2)
+)
+
+(<== (sameCreator ?movie1 ?movie2)
+  (sameActor ?movie1 ?movie2)
 )
 
 ;;; same things
@@ -115,6 +116,16 @@
 (<== (sameGenre ?movie1 ?movie2)
   (movieGenres ?movie1 ?genre)
   (movieGenres ?movie2 ?genre)
+)
+
+(<== (sameWriter ?movie1 ?movie2)
+  (movieWriter ?movie1 ?writer)
+  (movieWriter ?movie2 ?writer)
+)
+
+(<== (sameActor ?movie1 ?movie2)
+  (movieActors ?movie1 ?actor)
+  (movieActors ?movie2 ?actor)
 )
 
 (<== (sameGenres ?movie1 ?movie2)
