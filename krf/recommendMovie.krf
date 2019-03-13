@@ -27,6 +27,22 @@
   (criticFavorite ?inputMovie ?recommendedMovie ?rating)
 )
 
+(<== (recommendMovie ?inputMovie ?recommendedMovie ?rating)
+  (academyFavorite ?inputMovie ?recommendedMovie ?rating)
+)
+
+(<== (recommendMovie ?inputMovie ?recommendedMovie ?rating)
+  (oldies ?inputMovie ?recommendedMovie ?rating)
+)
+
+(<== (recommendMovie ?inputMovie ?recommendedMovie ?rating)
+  (hiddenGems ?inputMovie ?recommendedMovie ?rating)
+)
+
+(<== (recommendMovie ?inputMovie ?recommendedMovie ?rating)
+  (foreignLanguage ?inputMovie ?recommendedMovie ?rating)
+)
+
 ;;; recommendation types
 
 (<== (criticFavorite ?inputMovie ?criticMovie ?rating)
@@ -45,16 +61,15 @@
   (greaterThan ?numRev 10000)
 )
 
-(<== (academyFavorite ?inputMovie ?academyMovie)
- (movieAdvisoryRating ?inputMovie ?rating)
+(<== (academyFavorite ?inputMovie ?academyMovie ?rating)
  (similarMovie ?inputMovie ?academyMovie ?rating)
  (movieAwardWon ?academyMovie)
  (movieMetascore ?academyMovie ?score)
  (greaterThan ?score 80)
 )
 
-(<== (oldies ?inputMovie ?oldMovie)
- (sameAdvisoryRating ?inputMovie ?oldMovie)
+(<== (oldies ?inputMovie ?oldMovie ?rating)
+ (sameAdvisoryRating ?rating ?oldMovie)
  (sameDirectorOrGenre ?inputMovie ?oldMovie)
  (movieDecade ?oldMovie ?decade)
  (lessThan ?decade 1980)
@@ -69,17 +84,16 @@
  (greaterThan 5000 ?numRevs)
 )
 
-(<== (newRating ?inputMovie ?newRatingMovie)
- (movieAdvisoryRating ?inputMovie ?rating)
- (similarMovie ?inputMovie ?newRatingMovie ?newRating)
- (different ?rating ?newRating)
-)
+;(<== (newRating ?inputMovie ?newRatingMovie)
+; (movieAdvisoryRating ?inputMovie ?rating)
+; (similarMovie ?inputMovie ?newRatingMovie ?newRating)
+; (different ?rating ?newRating)
+;)
 
-(<== (foreignLanguage ?inputMovie ?foreignLanguageMovie)
- (movieAdvisoryRating ?inputMovie ?rating)
+(<== (foreignLanguage ?inputMovie ?foreignLanguageMovie ?rating)
  (similarMovie ?inputMovie ?foreignLanguageMovie ?rating)
- (movieLanguage ?foreignLanguageMovie ?language2)
- (uninferredSentence (movieLanguage ?foreignLanguageMovie English))
+ (movieLanguage ?foreignLanguageMovie ?language)
+ (different ?language English)
 )
 
 ;;; similarMovie
