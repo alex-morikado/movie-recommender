@@ -3,19 +3,19 @@
 Movie recommendation system with a knowledge-based approach.
 Designed as a project for EECS 371 Knowledge Representation &amp; Reasoning at Northwestern University.
 
-##Knowledge
+## Knowledge
 
 The knowledge used for this system is from the MovieLens latest dataset downloaded on 02/20/2019.
 We are using the small dataset as it will allow us to develop our project quickly without concern for scalability and performance optimization.
 Data from MovieLens is not included in this repository as we do not have the rights to redistribute.
 We also used the OMDB (Open Movie Database) to supplement the data from MovieLens.
 
-##Knowledge
+## Knowledge
 
 We transformed the raw data from the sources mentioned above into krf.
 This allowed us to use Companions and the Fire for querying and inference.
 
-##Files
+## Files
 
 There are three files that compose our microtheory: omdb.krf, movies.krf, and recommendMovies.krf.
 
@@ -24,21 +24,27 @@ There are three files that compose our microtheory: omdb.krf, movies.krf, and re
 `recommendMovies.krf` contains the Horn Clauses that define the reasoning for the movie recommendations.
 
 
-##Horn Clauses
+## Horn Clauses
 
 **(recommendMovieName ?inputMovie ?recommendedMovie)** finds movies that are similar and have the same rating where the recommended movie also satisfies at least one of the recommendation types.
 
 **(recommendMovieName ?inputMovieName ?recommendedMovieName ?rating)** finds movies that are similar where the recommended movie has the specified rating and where the recommended movie satisfies at least one of the recommendation types.
 
-#Recommendation Types
+### Recommendation Types
 
-**(criticFavorite ?inputMovie ?criticMovie ?rating)** indicates that the inputMovie and criticMovie are similar and that criticMovie is a critic favorite on Metacritic
+**(criticFavorite ?inputMovie ?criticMovie ?rating)** indicates that inputMovie and criticMovie are similar and that criticMovie is a critic favorite on Metacritic.
 
-**(fanFavorite ?movie ?movieToFind ?rating)** indicates that the inputMovie and movieToFind are similar and that movieToFind is a fan favorite on IMDB
+**(fanFavorite ?inputMovie ?fanFavMovie ?rating)** indicates that inputMovie and fanFavMovie are similar and that fanFavMovie has a large number of ratings on IMDB.
 
-**(academyFavorite ?inputMovie ?academyFavorite)** indicates that the inputMovie and academyFavorite are similar and that academyFavorite has won an Academy Award.
+**(academyFavorite ?inputMovie ?academyFavorite)** indicates that inputMovie and academyFavorite are similar and that academyFavorite has won an Academy Award.
 
-##Example Queries
+**(oldies ?inputMovie ?oldMovie)** indicates that inputMovie and oldMovie are similar and that oldMovie was released before 1980.
+
+**(hiddenGems ?inputMovie ?hiddenGemMovie)** indicates that inputMovie and hiddenGemMovie are similar and that hiddenGemMovie has few IMDB ratings and a high Metacritic score.
+
+**(foreignLanguage ?inputMovie ?foreignLanguageMovie)** indicates that inputMovie and foreignLanguageMovie are similar and that foreignLanguageMovie was not published in English.
+
+## Example Queries
 
 **(recommendMovieName "Toy Story" ?recommended)** will return all movies that are similar to and have the same rating as Toy Story.
 Pocahontas is fan favorite movie that is recommended by this query.
