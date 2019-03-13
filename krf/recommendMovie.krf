@@ -130,7 +130,9 @@
   (movieGenres ?movie1 ?genre1)
   (movieGenres ?movie2 ?genre1)
   (movieGenres ?movie1 ?genre2)
-  (movieGenres ?movie2 ?genre2))
+  (movieGenres ?movie2 ?genre2)
+  (different ?genre1 ?genre2)
+  )
 
 (<== (sameDirector ?movie1 ?movie2)
   (movieDirector ?movie1 ?director)
