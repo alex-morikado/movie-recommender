@@ -13,7 +13,7 @@ We also used the OMDB (Open Movie Database) to supplement the data from MovieLen
 ## Knowledge
 
 We transformed the raw data from the sources mentioned above into krf.
-This allowed us to use Companions and the Fire for querying and inference.
+This allowed us to use Companions and Fire for querying and inference.
 
 ## Files
 
@@ -36,7 +36,7 @@ There are three files that compose our microtheory: omdb.krf, movies.krf, and re
 
 **(fanFavorite ?inputMovie ?fanFavMovie ?rating)** indicates that inputMovie and fanFavMovie are similar and that fanFavMovie has a large number of ratings on IMDB.
 
-**(academyFavorite ?inputMovie ?academyFavorite)** indicates that inputMovie and academyFavorite are similar and that academyFavorite has won an Academy Award.
+**(academyFavorite ?inputMovie ?academyFavMovie)** indicates that inputMovie and academyFavMovie are similar and that academyFavMovie has won an Academy Award.
 
 **(oldies ?inputMovie ?oldMovie)** indicates that inputMovie and oldMovie are similar and that oldMovie was released before 1980.
 
@@ -46,7 +46,7 @@ There are three files that compose our microtheory: omdb.krf, movies.krf, and re
 
 ## Example Queries
 
-**(recommendMovieName "Toy Story" ?recommended)** will return all movies that are similar to and have the same rating as Toy Story.
+**(recommendMovieName "Toy Story" ?recommended)** will return all movies that are similar to and have the same advisory rating as Toy Story.
 Pocahontas is fan favorite movie that is recommended by this query.
 
 **(recommendMovieName "Toy Story ?recommended" PG-13)** will return all PG-13 movies that are similar to Toy Story.
