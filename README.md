@@ -52,6 +52,26 @@ Pocahontas is fan favorite movie that is recommended by this query.
 **(recommendMovieName "Toy Story ?recommended" PG-13)** will return all PG-13 movies that are similar to Toy Story.
 Batman Forever is fan favorite movie that is recommended by this query.
 
+## Notes on the omdb_downloader
+The requests library for python must be installed.
+Alternatively, one could modify the code to use urllib2 to make the http request.
+```
+pip install requests
+```
+Also if you must have a keys.py file with a single line:
+```
+omdb = YOUR_API_KEY
+```
+Where you replace YOUR_API_KEY with your OMDB API key.
+Use the link below to learn more about the OMDB API and generate an API key.
+
+The MovieLens data, which you can download using the link below, is expected to be unzipped and one directory above the code file.
+If you would like to keep the MovieLens data in a different directory as `omdb_downloader.py`, modify the filepath in line 5 of `omdb_downloader.py`
+The output filename can also be modified as needed.
+Finally, the number of lines to read is also specified in `omdb_downloader.py`.
+Running this file will download a krf file of the first LINES_TO_READ - 1 movies in the MovieLens dataset.
+
+
 ## Links
 
 - [MovieLens dataset](http://files.grouplens.org/datasets/movielens/ml-latest-small.zip)

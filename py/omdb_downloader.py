@@ -3,7 +3,7 @@ import keys
 import json
 
 LINK_FILE_PATH = "../ml-latest-small/links.csv"
-OUTPUT_FILENAME = "omdb2.krf"
+OUTPUT_FILENAME = "omdb.krf"
 BASE_URL = "https://www.omdbapi.com/?apikey=" + keys.omdb
 
 LINES_TO_READ = 200
