@@ -54,7 +54,7 @@ Batman Forever is fan favorite movie that is recommended by this query.
 
 ## Notes on the omdb_downloader
 The requests library for python must be installed.
-Alternatively, one could modify the code to use urllib2 to make the http request.
+Alternatively, one could modify the code to use urllib2 to make the http requests.
 ```
 pip install requests
 ```

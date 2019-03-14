@@ -83,7 +83,7 @@
 
 (<== (foreignLanguage ?foreignLanguageMovie)
  (movieLanguage ?foreignLanguageMovie ?language)
- (different ?language English)
+ (uninferredSentence (movieLanguage ?foreignLanguageMovie English))
 )
 
 ;;; similarMovie
