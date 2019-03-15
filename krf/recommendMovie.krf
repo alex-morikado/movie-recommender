@@ -76,11 +76,6 @@
  (greaterThan 5000 ?numRevs)
 )
 
-;(<== (newRating ?inputMovie ?newRatingMovie)
-; (movieAdvisoryRating ?inputMovie)
-; (different ?newRating)
-;)
-
 (<== (foreignLanguage ?foreignLanguageMovie)
  (movieLanguage ?foreignLanguageMovie ?language)
  (uninferredSentence (movieLanguage ?foreignLanguageMovie English))
@@ -128,23 +123,6 @@
   (movieActors ?movie2 ?actor)
 )
 
-(<== (sameGenres ?movie1 ?movie2)
-  (evaluate ?movieGenres1
-     (TheClosedRetrievalSetOf ?genre
-         (movieGenres ?movie1 ?genre)))
-  (evaluate ?movieGenres2
-     (TheClosedRetrievalSetOf ?genre
-         (movieGenres ?movie2 ?genre)))
-  (equals ?movieGenres1 ?movieGenres2))
-
-(<== (same2Genres ?movie ?movie2)
-  (movieGenres ?movie1 ?genre1)
-  (movieGenres ?movie2 ?genre1)
-  (movieGenres ?movie1 ?genre2)
-  (movieGenres ?movie2 ?genre2)
-  (different ?genre1 ?genre2)
-  )
-
 (<== (sameDirector ?movie1 ?movie2)
   (movieDirector ?movie1 ?director)
   (movieDirector ?movie2 ?director)
@@ -154,20 +132,3 @@
   (movieAdvisoryRating ?movie1 ?rating)
   (movieAdvisoryRating ?movie2 ?rating)
 )
-
-(<== (sameActors ?movie1 ?movie2)
-  (movieActors ?movie1 ?actor)
-  (movieActors ?movie2 ?actor)
-)
-
-;;; (recommend ?movie ?criteria ?result)
-;;; (elementOf ?c1 ?criteria)
-;;; (unifies ?c1 fanFav)
-;;; (fanFav ?movie ?movieList ?result)
-
-;;; gets all of the bindings for fanFav
-;;; (closedRetrieval ?result SetOf (fanFav ?movie ?movieList ?result))
-
-;;; make sure that movie results are reasonable, be able to combine queries
-
-;;; unifies ?something ?wholePredicate | this would allow us to compose things
