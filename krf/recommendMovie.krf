@@ -54,7 +54,7 @@
 
 (<== (fanFavorite ?fanFavMovie)
   (movieImdbRating ?fanFavMovie ?score)
-  (greaterThan 6.5 ?score)
+  (greaterThan ?score 7.0)
   (movieImdbRatingCount ?fanFavMovie ?numRev)
   (greaterThan ?numRev 100000)
 )
